@@ -26,7 +26,7 @@ export class UserEntity {
     if ( emailValidated === undefined ) throw CustomError.badRequest( 'Missing emailValidated' );
     if ( !password ) throw CustomError.badRequest( 'Missing password' );
     if ( !role ) throw CustomError.badRequest( 'Missing role' );
-    if ( !estado ) throw CustomError.badRequest( 'Missing role' );
+    if ( estado === undefined ) throw CustomError.badRequest( 'Missing role' );
 
 
     return new UserEntity( _id || id, name, email, emailValidated, password, role, estado, img );
