@@ -8,7 +8,9 @@ import { CustomError, LoginUserDto, RegisterUserDto, UserEntity } from '../../do
 export class AuthService {
 
   // DI
-  constructor() {}
+  constructor(
+    // DI - EMAIL SERVICE
+  ) {}
 
 
   public async registerUser( registerUserDto: RegisterUserDto ) {
