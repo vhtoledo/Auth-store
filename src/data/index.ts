@@ -1,5 +1,5 @@
 
 
-export * from './mongo/mongo-database';
+export * from './mongoModels/mongo-database';
 
-export * from './mongo/models/user.model';
+export * from './mongoModels/models/user.model';
