@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
 import { CustomError } from "../../domain";
+import { CreateEmpleadoDto } from '../../domain/dtos/empleado/create-empleado.dto';
 
 
 export class EmpleadoController {
@@ -19,7 +20,10 @@ export class EmpleadoController {
     
     createEmpleado = async(req: Request, res: Response) => {
 
-        res.json('Create Empleado')
+        const [error, createEmpleadoDto] = CreateEmpleadoDto.create( req.body );
+        if ( error ) return res.status(400).json({ error });
+        
+        res.json(createEmpleadoDto);
     }
 
     getEmpleado = async(req: Request, res: Response) => {
