@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { AuthRoutes } from './auth/routes';
+import { EmpleadoRoutes } from './empleado/routes';
 
 
 
@@ -13,6 +14,7 @@ export class AppRoutes {
     
     // Definir las rutas
     router.use('/api/auth', AuthRoutes.routes);
+    router.use('/api/empleado', EmpleadoRoutes.routes);
 
 
 
