@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { CustomError } from "../../domain";
+import { CustomError, PaginationDto } from "../../domain";
 import { CreateEmpleadoDto } from '../../domain/dtos/empleado/create-empleado.dto';
 import { EmpleadoService } from '../services/empleado.service';
 
@@ -33,7 +33,11 @@ export class EmpleadoController {
 
     getEmpleado = async(req: Request, res: Response) => {
 
-        this.empleadoService.getEmpleado()
+        const { page = 1, limit = 10 } = req.query;
+        const [ error, paginationDto ] = PaginationDto.create( +page, +limit );
+        if ( error ) return res.status(400).json({ error });
+
+        this.empleadoService.getEmpleado( paginationDto! )
           .then( empleados => res.json( empleados ))
           .catch( error => this.handleError(error, res));
     };
