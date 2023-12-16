@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { EmpleadoController } from './controller';
+import { AuthMiddleware } from '../middlewares/auth.middleware';
 
 
 
@@ -14,7 +15,7 @@ export class EmpleadoRoutes {
     
     // Definir las rutas
     router.get('/', controller.getEmpleado);
-    router.post('/', controller.createEmpleado);
+    router.post('/',[ AuthMiddleware.validateJWT ], controller.createEmpleado);
 
 
     return router;
