@@ -45,4 +45,34 @@ export class EmpleadoService {
             throw CustomError.internalServer(`${ error }`)
         }
     }
+
+    async getEmpleado() {
+
+        try {
+
+          const empleados = await EmpleadoModel.find();
+
+          return empleados.map( empleado => ({
+            nombre: empleado.nombre,
+            apellido: empleado.apellido,
+            dni: empleado.dni,
+            cuil: empleado.cuil,
+            fechaNacimiento: empleado.fechaNacimiento,
+            numAfiliado: empleado.numAfiliado,
+            direccion: empleado.direccion,
+            localidad: empleado.localidad,
+            codigoPostal: empleado.codigoPostal,
+            telefono: empleado.telefono,
+            celular: empleado.celular,
+            email: empleado.email,
+            img: empleado.img,
+            categoria: empleado.categoria,
+            fechaIngreso: empleado.fechaIngreso,
+            estado: empleado.estado
+          }))
+            
+        } catch (error) {
+            throw CustomError.internalServer('Internal Server Error')
+        }
+    }
 }

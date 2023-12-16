@@ -33,6 +33,8 @@ export class EmpleadoController {
 
     getEmpleado = async(req: Request, res: Response) => {
 
-        res.json('Obtener Empleado')
-    }
+        this.empleadoService.getEmpleado()
+          .then( empleados => res.json( empleados ))
+          .catch( error => this.handleError(error, res));
+    };
 }
