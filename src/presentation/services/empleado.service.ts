@@ -70,8 +70,8 @@ export class EmpleadoService {
             page: page,
             limit: limit,
             total: total,
-            next: `/api/categories?page=${ ( page + 1 ) }&limit=${ limit }`,
-            prev: (page - 1 > 0) ? `/api/categories?page=${ ( page - 1 ) }&limit=${ limit }`: null,
+            next: `/api/empleados?page=${ ( page + 1 ) }&limit=${ limit }`,
+            prev: (page - 1 > 0) ? `/api/empleados?page=${ ( page - 1 ) }&limit=${ limit }`: null,
 
             empleados: empleados.map( empleado => ({
               nombre: empleado.nombre,

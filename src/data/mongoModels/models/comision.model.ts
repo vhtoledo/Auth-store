@@ -29,4 +29,4 @@ const comisionSchema = new mongoose.Schema( {
 }, {timestamps:true}, );
 
 
-export const comisionModel = mongoose.model('Comision', comisionSchema);
+export const ComisionModel = mongoose.model('Comision', comisionSchema);

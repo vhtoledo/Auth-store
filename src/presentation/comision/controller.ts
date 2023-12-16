@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
-import { CustomError, PaginationDto } from "../../domain";
+import { CreateComisionDto, CustomError, PaginationDto } from "../../domain";
+import { ComisionService } from "../services/comision.Service";
 
 
 
@@ -7,7 +8,7 @@ export class ComisionController {
 
     // DI
     constructor(
-      //private readonly comisionService: ComisionService,
+      private readonly comisionService: ComisionService,
     ) {}
 
 
@@ -22,14 +23,12 @@ export class ComisionController {
     
     createComision = async(req: Request, res: Response) => {
 
-
-        return res.json('Post Comision')
-        //const [error, createEmpleadoDto] = CreateEmpleadoDto.create( req.body );
-        //if ( error ) return res.status(400).json({ error });
-        //
-        //this.empleadoService.createEmpleado(createEmpleadoDto!, req.body.user)
-        //  .then( empleado => res.status(201).json( empleado ))
-        //  .catch( error => this.handleError( error, res ));
+        const [error, createComisionDto] = CreateComisionDto.create( req.body );
+        if ( error ) return res.status(400).json({ error });
+        
+        this.comisionService.createEmpleado(createComisionDto!)
+          .then( comision => res.status(201).json( comision ))
+          .catch( error => this.handleError( error, res ));
     }
 
     getComision = async(req: Request, res: Response) => {
@@ -38,10 +37,8 @@ export class ComisionController {
         const [ error, paginationDto ] = PaginationDto.create( +page, +limit );
         if ( error ) return res.status(400).json({ error });
 
-        return res.json('Get Comision')
-
-        //this.empleadoService.getEmpleado( paginationDto! )
-        //  .then( empleados => res.json( empleados ))
-        //  .catch( error => this.handleError(error, res));
+        this.comisionService.getComision( paginationDto! )
+          .then( comisiones => res.json( comisiones ))
+          .catch( error => this.handleError(error, res));
     };
 }
