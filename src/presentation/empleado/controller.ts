@@ -1,12 +1,15 @@
 import { Response, Request } from "express";
 import { CustomError } from "../../domain";
 import { CreateEmpleadoDto } from '../../domain/dtos/empleado/create-empleado.dto';
+import { EmpleadoService } from '../services/empleado.service';
 
 
 export class EmpleadoController {
 
     // DI
-    constructor() {}
+    constructor(
+      private readonly empleadoService: EmpleadoService,
+    ) {}
 
 
     private handleError = (error: unknown, res: Response ) => {
@@ -23,7 +26,9 @@ export class EmpleadoController {
         const [error, createEmpleadoDto] = CreateEmpleadoDto.create( req.body );
         if ( error ) return res.status(400).json({ error });
         
-        res.json(createEmpleadoDto);
+        this.empleadoService.createEmpleado(createEmpleadoDto!, req.body.user)
+          .then( empleado => res.status(201).json( empleado ))
+          .catch( error => this.handleError( error, res ));
     }
 
     getEmpleado = async(req: Request, res: Response) => {

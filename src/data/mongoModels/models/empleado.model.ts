@@ -13,7 +13,8 @@ const empleadoSchema = new mongoose.Schema( {
   },
   dni: {
     type: Number,
-    required: [true, 'Dni es requerido']
+    required: [true, 'Dni es requerido'],
+    unique: true
   },
   cuil: {
     type: Number,
