@@ -28,5 +28,13 @@ const comisionSchema = new mongoose.Schema( {
 
 }, {timestamps:true}, );
 
+comisionSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function( doc, ret, options ) {
+    delete ret.id
+  },
+});
+
 
 export const ComisionModel = mongoose.model('Comision', comisionSchema);

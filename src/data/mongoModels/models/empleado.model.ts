@@ -75,5 +75,13 @@ const empleadoSchema = new mongoose.Schema( {
 
 }, {timestamps:true}, );
 
+empleadoSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function( doc, ret, options ) {
+    delete ret.id
+  },
+});
+
 
 export const EmpleadoModel = mongoose.model('Empleado', empleadoSchema);

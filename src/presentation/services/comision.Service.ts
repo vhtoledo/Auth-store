@@ -8,9 +8,9 @@ export class ComisionService {
     // DI
     constructor() {}
 
-    async createEmpleado( createComisionDto: CreateComisionDto ) {
+    async createComision( createComisionDto: CreateComisionDto ) {
 
-        const comisionExists = await ComisionModel.findOne({ dni: createComisionDto.empleado });
+        const comisionExists = await ComisionModel.findOne({ instrumentoLegal: createComisionDto.instrumentoLegal });
         if ( comisionExists ) throw CustomError.badRequest('Comision ya existe');
 
         try {
@@ -39,7 +39,8 @@ export class ComisionService {
             ComisionModel.find()
               .skip( (page - 1) * limit )
               .limit( limit )
-              // todo: populate
+              .populate('empleado', 'nombre apellido numAfiliado dni')
+              .populate('user', 'name role')
           ])
 
           return {

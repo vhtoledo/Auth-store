@@ -29,7 +29,7 @@ export class ComisionController {
         });
         if ( error ) return res.status(400).json({ error });
         
-        this.comisionService.createEmpleado(createComisionDto!)
+        this.comisionService.createComision(createComisionDto!)
           .then( comision => res.status(201).json( comision ))
           .catch( error => this.handleError( error, res ));
     }
