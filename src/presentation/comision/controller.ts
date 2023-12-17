@@ -23,7 +23,10 @@ export class ComisionController {
     
     createComision = async(req: Request, res: Response) => {
 
-        const [error, createComisionDto] = CreateComisionDto.create( req.body );
+        const [error, createComisionDto] = CreateComisionDto.create( {
+          ...req.body,
+          user: req.body.user.id,
+        });
         if ( error ) return res.status(400).json({ error });
         
         this.comisionService.createEmpleado(createComisionDto!)

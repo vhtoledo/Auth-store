@@ -1,3 +1,4 @@
+import { Validators } from "../../../config";
 
 
 export class CreateComisionDto {
@@ -23,8 +24,12 @@ export class CreateComisionDto {
         if ( !instrumentoLegal ) return ['Falta Instrumento Legal'];
         if ( !fechaSalida ) return ['Falta Fecha de Salida'];
         if ( !fechaRegreso ) return ['Falta Fecha de Regreso'];
+        
         if ( !empleado) return ['Falta el Empleado'];
+        if ( !Validators.isMongoID(empleado) ) return ['Id de Empleado Invalido'];
+
         if ( !user ) return ['Falta el Usuario'];
+        if ( !Validators.isMongoID(user) ) return ['Id de Usuario Invalido'];
 
         return [
             undefined,
