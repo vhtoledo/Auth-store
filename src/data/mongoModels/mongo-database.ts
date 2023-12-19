@@ -3,18 +3,18 @@ import mongoose from "mongoose";
 
 interface Options {
     mongoUrl: string;
-    dnName: string
+    dbName: string
 }
 
 export class MongoDatabase {
 
     static async connect( options: Options ) {
-        const { mongoUrl, dnName } = options;
+        const { mongoUrl, dbName } = options;
 
         try {
 
             await mongoose.connect( mongoUrl, {
-              dbName: dnName,
+              dbName: dbName,
             });
       
             return true;
@@ -23,6 +23,10 @@ export class MongoDatabase {
               console.log('Mongo connection error');
               throw error;
           }
+    }
+
+    static async disconnect() {
+        await mongoose.disconnect();
     }
 
 
