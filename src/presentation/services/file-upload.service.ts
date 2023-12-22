@@ -20,7 +20,7 @@ export class FileUploadService {
     async uploadSingle(
         file: UploadedFile,
         folder: string = 'uploads',
-        validEntensions: string[] = ['png','jpg','jpeg','pdf']
+        validEntensions: string[] = ['png','jpg','jpeg']
     ) {
 
         try {
