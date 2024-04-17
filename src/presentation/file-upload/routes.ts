@@ -22,7 +22,7 @@ export class FileUploadRoutes {
     router.use( TypeMiddleware.validTypes(['users', 'empleados']));
     // Definir las rutas
     router.post('/single/:type',[AuthMiddleware.validateJWT], controller.uploadFile );
-    router.post('/multiple/:type',[AuthMiddleware.validateJWT], controller.uploadMultipleFile );
+    router.post('/multiple/:type',[AuthMiddleware.validateJWT], controller.uploadMultileFiles );
 
 
     return router;
